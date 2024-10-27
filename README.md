@@ -1,3 +1,5 @@
+NPM URL: https://www.npmjs.com/package/zyper?activeTab=readme
+
 Installation
 
 # 1
