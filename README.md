@@ -15,6 +15,7 @@ You are now finished and can use Zyper
 
 Basic Code
 
+```javascript
 const { Client, GatewayIntentBits, ChannelType } = require('discord.js');
 const { on_bot } = require("zyper");
 const BlacklistBanManager = require("zyper");
