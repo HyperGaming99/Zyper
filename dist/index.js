@@ -5,6 +5,8 @@ const BlacklistBanManager = require('./BlacklistBanManager');
 const swap_pages = require('./Swappages');
 
 
+// Credis to Ezcord ( https://github.com/tibue99/ezcord )
+
 function printReadyTable(client) {
   console.log(chalk.cyan(`You running with Zyper 1.0.9`));
 
