@@ -4,12 +4,17 @@ const LanguageLoder = require('./LanguageLoder');
 const BlacklistBanManager = require('./BlacklistBanManager');
 const swap_pages = require('./Swappages');
 
+const startTimestamp = Date.now();
+
 
 // Credis to Ezcord ( https://github.com/tibue99/ezcord )
 
 function printReadyTable(client) {
   console.log(chalk.cyan(`You running with Zyper 1.0.9`));
 
+  
+const readyTimestamp = Date.now();
+const timeDifference = readyTimestamp - startTimestamp;
 
   let table = new AsciiTable()
       .setHeading('Bot', 'ID', 'Discord.js', 'Guilds', 'Latency')
@@ -18,7 +23,7 @@ function printReadyTable(client) {
           client.user.id,                      
           require('discord.js').version,     
           client.guilds.cache.size,            
-          `${client.ws.ping}ms`                  
+          `${timeDifference} ms`                 
       )
       .setBorder('│', '─', '', '', '╯', '╰'); 
 
