@@ -15,5 +15,9 @@
     "discord.js": "^14.16.3",
     "enmap": "^5.9.3",
     "fs": "^0.0.1-security"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HyperGaming99/Zyper.git"
   }
 }
