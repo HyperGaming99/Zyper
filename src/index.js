@@ -14,14 +14,13 @@ on_bot(client);
 
 
 client.once('ready', () => {
-    // Benutzer in einer bestimmten Guild bannen
+
 if(!banManager.isBanned('1290676510306467873', '1079419675949142168')) {
-    banManager.addBan('1290676510306467873', '1079419675949142168', 'Verstoß gegen Regeln');
+    banManager.addBan('1290676510306467873', '1079419675949142168', 'Testing ban');
     }
     
-    // Überprüfen, ob ein Benutzer in einer bestimmten Guild gebannt ist
     if (banManager.isBanned('1290676510306467873', '1079419675949142168')) {
-        console.log('Benutzer ist in guild_1 gebannt:', banManager.getBanInfo('1290676510306467873', '1079419675949142168'));
+        console.log('User is banned');
     }
     console.log(LanguageLoder.getTranslation('ready', 'en'));
     console.log( banManager.listBans('1290676510306467873'));
