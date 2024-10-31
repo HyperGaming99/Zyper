@@ -1,6 +1,6 @@
 {
   "name": "zyper",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Zyper for Discord.js for easy and fast development",
   "main": "dist/index.js",
   "keywords": [
