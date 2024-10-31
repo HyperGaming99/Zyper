@@ -1,23 +1,3 @@
-NPM URL: https://www.npmjs.com/package/zyper?activeTab=readme
-
-Installation
-
-# 1
-
-npm i zyper
-
-# 2 
-
-Use the Basic Code
-
-# 3 
-
-You are now finished and can use Zyper
-
-
-Basic Code
-
-```javascript
 require('dotenv').config();
 const { config } = require('dotenv');
 const Bot = require("../dist/test");
