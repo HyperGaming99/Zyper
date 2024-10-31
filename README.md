@@ -20,7 +20,7 @@ Basic Code
 ```javascript
 require('dotenv').config();
 const { config } = require('dotenv');
-const Bot = require("../dist/test");
+const Bot = require("zyper");
 const { GatewayIntentBits } = require('discord.js');
 
 const bot = new Bot([GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages]);
