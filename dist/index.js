@@ -62,8 +62,8 @@ class Bot {
         this.enableCommands = true;
     }
 
-    loadSlashCommands() {
-        const commandsPath = path.join(process.cwd(), 'slashCommands');
+    loadSlashCommands(dir) {
+        const commandsPath = path.join(process.cwd(), dir || 'slashCommands');
         const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
     
         for (const file of commandFiles) {
