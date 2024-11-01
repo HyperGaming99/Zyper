@@ -54,6 +54,10 @@ class Bot {
         this.client.on(event, callback);
     }
 
+    once(event, callback) {
+        this.client.once(event, callback);
+    }
+
     enableSlashCommands() {
         this.enableCommands = true;
     }
