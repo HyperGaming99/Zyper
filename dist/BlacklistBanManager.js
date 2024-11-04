@@ -3,25 +3,25 @@ const Enmap = require('enmap');
 class BlacklistBanManager {
     constructor(client) {
         if (!client) {
-            throw new Error("Eine Discord.js Client-Instanz ist erforderlich.");
+            throw new Error("A Discord.js client instance is required.");
         }
         this.client = client;
         this.bans = new Enmap({ name: 'bans' });
     }
 
     /**
-     * Füge einen Benutzer zur Bannliste einer spezifischen Guild hinzu und banne ihn auf Discord.
-     * @param {string} guildId - Die ID der Guild.
-     * @param {string} userId - Die ID des Benutzers, der gebannt werden soll.
-     * @param {string} reason - Der Grund für den Bann.
+     * Add a user to the ban list of a specific guild and ban them on Discord.
+     * @param {string} guildId - The ID of the guild.
+     * @param {string} userId - The ID of the user to be banned.
+     * @param {string} reason - The reason for the ban.
      */
-    async addBan(guildId, userId, reason = 'Kein Grund angegeben') {
+    async addBan(guildId, userId, reason = 'No reason provided') {
         if (!this.bans.has(guildId)) {
             this.bans.set(guildId, {});
         }
         const guildBans = this.bans.get(guildId);
         if (guildBans[userId]) {
-            throw new Error(`Benutzer mit der ID ${userId} ist bereits in Guild ${guildId} gebannt.`);
+            throw new Error(`User with ID ${userId} is already banned in guild ${guildId}.`);
         }
 
         try {
@@ -29,24 +29,24 @@ class BlacklistBanManager {
             await guild.members.ban(userId, { reason });
             guildBans[userId] = { reason, date: new Date() };
             this.bans.set(guildId, guildBans);
-            console.log(`Benutzer ${userId} wurde in Guild ${guildId} gebannt.`);
+            console.log(`User ${userId} has been banned in guild ${guildId}.`);
         } catch (error) {
-            console.error(`Fehler beim Bannen des Benutzers ${userId} in Guild ${guildId}:`, error);
+            console.error(`Error banning user ${userId} in guild ${guildId}:`, error);
         }
     }
 
     /**
-     * Entferne einen Benutzer von der Bannliste einer spezifischen Guild und entbanne ihn auf Discord.
-     * @param {string} guildId - Die ID der Guild.
-     * @param {string} userId - Die ID des Benutzers, der entbannt werden soll.
+     * Remove a user from the ban list of a specific guild and unban them on Discord.
+     * @param {string} guildId - The ID of the guild.
+     * @param {string} userId - The ID of the user to be unbanned.
      */
     async removeBan(guildId, userId) {
         if (!this.bans.has(guildId)) {
-            throw new Error(`Guild mit der ID ${guildId} hat keine Bans.`);
+            throw new Error(`Guild with ID ${guildId} has no bans.`);
         }
         const guildBans = this.bans.get(guildId);
         if (!guildBans[userId]) {
-            throw new Error(`Benutzer mit der ID ${userId} ist in Guild ${guildId} nicht gebannt.`);
+            throw new Error(`User with ID ${userId} is not banned in guild ${guildId}.`);
         }
 
         try {
@@ -54,17 +54,17 @@ class BlacklistBanManager {
             await guild.members.unban(userId);
             delete guildBans[userId];
             this.bans.set(guildId, guildBans);
-            console.log(`Benutzer ${userId} wurde in Guild ${guildId} entbannt.`);
+            console.log(`User ${userId} has been unbanned in guild ${guildId}.`);
         } catch (error) {
-            console.error(`Fehler beim Entbannen des Benutzers ${userId} in Guild ${guildId}:`, error);
+            console.error(`Error unbanning user ${userId} in guild ${guildId}:`, error);
         }
     }
 
     /**
-     * Überprüfen, ob ein Benutzer in einer bestimmten Guild gebannt ist.
-     * @param {string} guildId - Die ID der Guild.
-     * @param {string} userId - Die ID des Benutzers.
-     * @returns {boolean} - True, wenn der Benutzer in dieser Guild gebannt ist.
+     * Check if a user is banned in a specific guild.
+     * @param {string} guildId - The ID of the guild.
+     * @param {string} userId - The ID of the user.
+     * @returns {boolean} - True if the user is banned in this guild.
      */
     isBanned(guildId, userId) {
         const guildBans = this.bans.get(guildId) || {};
@@ -72,10 +72,10 @@ class BlacklistBanManager {
     }
 
     /**
-     * Erhalte die Banninformationen eines Benutzers in einer spezifischen Guild.
-     * @param {string} guildId - Die ID der Guild.
-     * @param {string} userId - Die ID des Benutzers.
-     * @returns {Object|null} - Banninformationen oder null, falls der Benutzer nicht gebannt ist.
+     * Get the ban information of a user in a specific guild.
+     * @param {string} guildId - The ID of the guild.
+     * @param {string} userId - The ID of the user.
+     * @returns {Object|null} - Ban information or null if the user is not banned.
      */
     getBanInfo(guildId, userId) {
         const guildBans = this.bans.get(guildId) || {};
@@ -83,9 +83,9 @@ class BlacklistBanManager {
     }
 
     /**
-     * Liste alle gebannten Benutzer einer bestimmten Guild auf.
-     * @param {string} guildId - Die ID der Guild.
-     * @returns {Array} - Eine Liste von Objekten mit Benutzerinformationen.
+     * List all banned users in a specific guild.
+     * @param {string} guildId - The ID of the guild.
+     * @returns {Array} - A list of objects with user information.
      */
     listBans(guildId) {
         const guildBans = this.bans.get(guildId) || {};
